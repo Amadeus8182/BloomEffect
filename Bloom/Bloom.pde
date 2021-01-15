@@ -20,7 +20,9 @@ void setup() {
   for(int y = 0; y < inputImage.height; y++) {
    for(int x = 0; x < inputImage.width; x++) {
     int index = y * inputImage.width + x;
-    outputImage.pixels[index] = getAverageColor(glowObject, inputImage, index);
+    if(straightBlending) outputImage.pixels[index] = getAverageColor(glowObject, inputImage, index);
+    else if(glowObject.pixels[index] == color(0,0,0)) outputImage.pixels[index] = inputImage.pixels[index];
+    else outputImage.pixels[index] = getAverageColor(glowObject, inputImage, index);
    }
   }
   outputImage.save("C:/Users/larry/Desktop/glow2.png");
